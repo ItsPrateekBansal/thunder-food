@@ -76,12 +76,14 @@
             
        
     </div>
+    <!-- <form action="/orders" method="post">
+        <button type="submit">PAY NOW</button>
+    </form> -->
     <form action="/orders" method="post" class="mt-6">
         
             <div>
                 <a href="/menu" class="inline-block px-3 py-1 md:px-6 md:py-2 rounded-full btn-primary text-white font-bold mt-12">Add More Items</a>   
-                <button name="pay-now" type="SUBMIT" hidden class="inline-block px-3 py-1 md:px-6 md:py-2 rounded-full btn-primary text-white font-bold mt-12 paynow-button" value="<%= session.cart.totalprice%>">PAY NOW</button>
-                
+                <button name="pay-now" type="SUBMIT" class="inline-block px-3 py-1 md:px-6 md:py-2 rounded-full btn-primary text-white font-bold mt-12 paynow-button" value="<%= session.cart.totalprice%>">PAY NOW</button>
             </div>
         
     </form>
