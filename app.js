@@ -59,13 +59,13 @@ require('./routes/login')(app, User, help);
 require('./routes/home')(app, User, help);
 require('./routes/register')(app, User, help);
 require('./routes/logout')(app, help);
-app.get('/cart' , cartcontroller().index)
-app.post('/updatecart',cartcontroller().update)
-app.get('/menu' , menucontroller().index)
+app.get('/cart' , help.redirectLogin, cartcontroller().index)
+app.post('/updatecart', help.redirectLogin, cartcontroller().update)
+app.get('/menu' , help.redirectLogin, menucontroller().index)
 app.listen(process.env.PORT || envar.PORT, ()=> {
     console.log("SERVER STARTED at " , envar.PORT);
 })
-app.post('/orders',(req,res)=>{
+app.post('/orders', help.redirectLogin, (req,res)=>{
     var options = {
         amount: req.session.cart.totalprice*100,  
         currency: "INR",
@@ -83,8 +83,8 @@ app.post('/orders',(req,res)=>{
         res.render('paymentpage', {orderid:order.id, useremail: useremail, phone: num})
     });
 })
-app.post('/payment/success',ordercontroller().index) ;
-app.get('/payment/success',(req,res)=>{
+app.post('/payment/success', help.redirectLogin, ordercontroller().index) ;
+app.get('/payment/success', help.redirectLogin, (req,res)=>{
     res.render('placed');
 })
 app.get('/adminorders' , adminauth, adminordercontroller().index) ; 
